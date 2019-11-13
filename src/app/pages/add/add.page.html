@@ -1,0 +1,36 @@
+<ion-header no-border>
+    <ion-toolbar color="dark">
+        <ion-buttons slot="start">
+            <ion-back-button color="secondary" defaultHref="/"> </ion-back-button>
+        </ion-buttons>
+        <ion-title> {{ list.title }} </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+    <ion-list color="dark">
+        <ion-item color="dark">
+            <ion-label position="floating"> Agregar un Epico</ion-label>
+            <ion-input type="text" [(ngModel)]="description" (keyup.enter)="addItem()"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-list-header color="dark" *ngIf="list.items.length > 0"> Epicos </ion-list-header>
+
+        <ion-item-sliding *ngFor="let item of list.items; let i = index" class="animdated fadeInDown">
+
+            <ion-item color="dark">
+                <ion-checkbox slot="start" color="secondary" [(ngModel)]="item.completed" (ionChange)="checkStatus( item )"></ion-checkbox>
+                <ion-label>{{ item.description}}</ion-label>
+            </ion-item>
+            <ion-item-options side="end">
+                <ion-item-option (click)="deleteItem(i)">
+                    <ion-icon slot="icon-only" name="close"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+</ion-content>
